@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ember & Bone | Grill House — Johannesburg</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --char:#1A1008;
+  --char2:#221508;
+  --amber:#C8870A;
+  --amber-light:#E8A82A;
+  --cream:#F5EDD8;
+  --white:#FFFFFF;
+  --smoke:#8B7355;
+  --ash:#4A3F30;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--char);color:var(--cream);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 56px;height:80px;display:flex;justify-content:space-between;align-items:center;transition:background .4s,box-shadow .4s}
+nav.scrolled{background:rgba(26,16,8,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(200,135,10,.2)}
+.nav-logo{text-align:center}
+.nav-logo-main{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--white);letter-spacing:2px}
+.nav-logo-sub{font-size:11px;color:var(--amber);letter-spacing:4px;font-weight:500;margin-top:1px}
+.nav-left,.nav-right{display:flex;gap:0;list-style:none}
+.nav-left a,.nav-right a{color:rgba(245,237,216,.7);text-decoration:none;font-size:13px;font-weight:500;padding:0 20px;height:80px;display:flex;align-items:center;letter-spacing:1px;transition:color .2s}
+.nav-left a:hover,.nav-right a:hover{color:var(--amber-light)}
+.nav-cta{background:var(--amber) !important;color:var(--char) !important;font-weight:600 !important;padding:0 24px !important;transition:background .2s !important}
+.nav-cta:hover{background:var(--amber-light) !important}
+
+/* HERO */
+.hero{height:100vh;min-height:640px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(200,135,10,.18) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,100,0,.08) 0%,transparent 50%),linear-gradient(160deg,#2d1a05 0%,#1a1008 40%,#0d0804 100%)}
+.hero-texture{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-ember-1{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(200,135,10,.35) 0%,transparent 70%);bottom:10%;right:15%;pointer-events:none;animation:flicker 4s ease-in-out infinite}
+.hero-ember-2{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(255,80,0,.2) 0%,transparent 70%);top:20%;left:10%;pointer-events:none;animation:flicker 6s ease-in-out infinite .5s}
+@keyframes flicker{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:.5;transform:scale(1.1)}}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px;max-width:800px}
+.hero-pre{display:inline-flex;align-items:center;gap:16px;margin-bottom:28px}
+.hero-line{width:40px;height:1px;background:var(--amber)}
+.hero-pre-text{font-size:12px;color:var(--amber);font-weight:500;letter-spacing:3px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,10vw,120px);font-weight:700;line-height:.9;color:var(--white);margin-bottom:12px}
+.hero h1 em{color:var(--amber);font-style:italic}
+.hero-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,3vw,26px);font-style:italic;color:var(--cream);opacity:.7;margin-bottom:48px;font-weight:400}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-amber{background:var(--amber);color:var(--char);padding:16px 40px;font-family:'Jost',sans-serif;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:background .2s}
+.btn-amber:hover{background:var(--amber-light)}
+.btn-outline-amber{border:1px solid rgba(200,135,10,.5);color:var(--cream);padding:16px 40px;font-family:'Jost',sans-serif;font-size:13px;font-weight:500;text-decoration:none;letter-spacing:2px;text-transform:uppercase;transition:border-color .2s,color .2s}
+.btn-outline-amber:hover{border-color:var(--amber);color:var(--amber-light)}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--smoke);font-size:11px;letter-spacing:2px}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--amber),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ORDER BAR */
+.order-bar{background:var(--char2);border-top:1px solid rgba(200,135,10,.2);border-bottom:1px solid rgba(200,135,10,.2);display:grid;grid-template-columns:repeat(3,1fr)}
+.order-item{display:flex;align-items:center;justify-content:center;gap:16px;padding:24px 32px;text-decoration:none;color:var(--cream);border-right:1px solid rgba(200,135,10,.15);transition:background .2s}
+.order-item:last-child{border-right:none}
+.order-item:hover{background:rgba(200,135,10,.08)}
+.order-icon{font-size:28px}
+.order-title{font-size:15px;font-weight:600;color:var(--white);margin-bottom:2px}
+.order-desc{font-size:12px;color:var(--smoke)}
+
+/* INTRO */
+.intro{padding:100px 56px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1400px;margin:0 auto}
+.intro-visual{position:relative;height:520px}
+.intro-main-img{width:75%;height:100%;background:linear-gradient(160deg,#3d2008 0%,#2a1505 100%);position:absolute;right:0;display:flex;align-items:center;justify-content:center}
+.intro-main-img .food-emoji{font-size:96px}
+.intro-accent-img{width:55%;height:55%;background:linear-gradient(160deg,#4a2810 0%,#2d1808 100%);position:absolute;bottom:0;left:0;border:4px solid var(--char);display:flex;align-items:center;justify-content:center}
+.intro-accent-img .food-emoji{font-size:64px}
+.intro-badge{position:absolute;top:40px;left:0;background:var(--amber);color:var(--char);padding:16px 20px;text-align:center}
+.intro-badge-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;line-height:1}
+.intro-badge-label{font-size:11px;font-weight:600;letter-spacing:1px;margin-top:2px}
+.intro-text .section-eyebrow{font-size:12px;color:var(--amber);font-weight:500;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.intro-text .section-eyebrow::before{content:'';width:32px;height:1px;background:var(--amber)}
+.intro-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,54px);font-weight:700;color:var(--white);margin-bottom:24px;line-height:1.1}
+.intro-text h2 em{color:var(--amber);font-style:italic}
+.intro-text p{font-size:16px;color:var(--smoke);line-height:1.9;margin-bottom:16px;font-weight:300}
+.intro-divider{width:48px;height:2px;background:var(--amber);margin:28px 0}
+.intro-features{display:flex;gap:32px;flex-wrap:wrap}
+.intro-feature{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--cream);font-weight:500}
+.intro-feature::before{content:'—';color:var(--amber)}
+
+
+/* PHOTO PLACEHOLDERS - replace with: <div class="ph"><img src="1.jpg" alt="..."></div> */
+.ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;border:2px dashed rgba(232,160,32,.55);background:repeating-linear-gradient(45deg,rgba(200,135,10,.06),rgba(200,135,10,.06) 14px,rgba(200,135,10,.12) 14px,rgba(200,135,10,.12) 28px)}
+.ph::before{content:'\1F4F7  ' attr(data-label);font-size:13px;letter-spacing:1px;color:rgba(232,160,32,.9);padding:12px}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ph:has(img){border:none;background:none}
+.ph:has(img)::before{display:none}
+
+/* MENU HIGHLIGHT */
+.menu-section{background:var(--char2);padding:100px 56px}
+.menu-inner{max-width:1400px;margin:0 auto}
+.menu-header{text-align:center;margin-bottom:64px}
+.menu-header .section-eyebrow{font-size:12px;color:var(--amber);font-weight:500;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px}
+.menu-header .section-eyebrow::before,.menu-header .section-eyebrow::after{content:'';width:32px;height:1px;background:var(--amber)}
+.menu-header h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:700;color:var(--white);line-height:1.1}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.menu-card{background:var(--char);border:1px solid rgba(200,135,10,.12);overflow:hidden;transition:border-color .3s}
+.menu-card:hover{border-color:rgba(200,135,10,.4)}
+.menu-card-img{height:240px;background:linear-gradient(160deg,#3a1f08 0%,#221205 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.menu-card-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,var(--char),transparent)}
+.menu-emoji{font-size:80px;position:relative;z-index:1}
+.menu-card-tag{position:absolute;top:16px;right:16px;background:var(--amber);color:var(--char);font-size:10px;font-weight:700;padding:4px 10px;letter-spacing:1px;z-index:2}
+.menu-card-body{padding:24px}
+.menu-card-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--white);margin-bottom:8px}
+.menu-card-desc{font-size:14px;color:var(--smoke);line-height:1.6;margin-bottom:16px;font-weight:300}
+.menu-card-footer{display:flex;justify-content:space-between;align-items:center}
+.menu-price{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--amber-light)}
+.menu-order{color:var(--amber);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:1px;transition:color .2s}
+.menu-order:hover{color:var(--amber-light)}
+.menu-cta{text-align:center}
+
+/* EXPERIENCE */
+.experience{padding:100px 56px;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.exp-text .section-eyebrow{font-size:12px;color:var(--amber);font-weight:500;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.exp-text .section-eyebrow::before{content:'';width:32px;height:1px;background:var(--amber)}
+.exp-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,50px);font-weight:700;color:var(--white);margin-bottom:20px;line-height:1.1}
+.exp-text p{font-size:16px;color:var(--smoke);line-height:1.9;margin-bottom:32px;font-weight:300}
+.exp-stats{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.exp-stat{border-left:2px solid var(--amber);padding-left:20px}
+.exp-stat-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;color:var(--amber-light);line-height:1}
+.exp-stat-label{font-size:13px;color:var(--smoke);margin-top:4px;letter-spacing:.5px}
+.exp-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.exp-card{background:var(--char2);border:1px solid rgba(200,135,10,.12);padding:32px 24px;text-align:center;transition:border-color .3s}
+.exp-card:hover{border-color:rgba(200,135,10,.4)}
+.exp-card-icon{font-size:32px;margin-bottom:12px;display:block}
+.exp-card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--white);margin-bottom:6px}
+.exp-card p{font-size:13px;color:var(--smoke);line-height:1.5}
+
+/* LOCATIONS */
+.locations{background:var(--char2);padding:100px 56px;text-align:center}
+.locations-inner{max-width:1000px;margin:0 auto}
+.locations .section-eyebrow{font-size:12px;color:var(--amber);font-weight:500;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px}
+.locations .section-eyebrow::before,.locations .section-eyebrow::after{content:'';width:32px;height:1px;background:var(--amber)}
+.locations h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,52px);font-weight:700;color:var(--white);margin-bottom:48px;line-height:1.1}
+.location-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px}
+.location-card{border:1px solid rgba(200,135,10,.15);padding:28px 20px;text-align:center;transition:background .2s,border-color .2s;text-decoration:none;display:block}
+.location-card:hover{background:rgba(200,135,10,.05);border-color:rgba(200,135,10,.4)}
+.loc-city{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--white);margin-bottom:4px}
+.loc-name{font-size:13px;color:var(--amber);font-weight:500;margin-bottom:8px;letter-spacing:.5px}
+.loc-hours{font-size:12px;color:var(--smoke)}
+
+/* RESERVATION */
+.reservation{padding:100px 56px;background:linear-gradient(160deg,#2a1808 0%,#1a1008 100%);border-top:1px solid rgba(200,135,10,.15);border-bottom:1px solid rgba(200,135,10,.15)}
+.reservation-inner{max-width:720px;margin:0 auto;text-align:center}
+.reservation .section-eyebrow{font-size:12px;color:var(--amber);font-weight:500;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px}
+.reservation .section-eyebrow::before,.reservation .section-eyebrow::after{content:'';width:32px;height:1px;background:var(--amber)}
+.reservation h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,56px);font-weight:700;color:var(--white);margin-bottom:14px}
+.reservation h2 em{color:var(--amber);font-style:italic}
+.reservation p{font-size:16px;color:var(--smoke);margin-bottom:44px;font-weight:300}
+.res-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.res-form input,.res-form select{background:rgba(255,255,255,.05);border:1px solid rgba(200,135,10,.2);color:var(--cream);padding:16px 18px;font-family:'Jost',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.res-form input:focus,.res-form select:focus{border-color:var(--amber)}
+.res-form input::placeholder{color:var(--ash)}
+.res-form select option{background:var(--char2)}
+.res-full{grid-column:1/-1}
+
+/* FOOTER */
+footer{background:#100900;padding:56px 56px 24px;border-top:1px solid rgba(200,135,10,.1)}
+.footer-inner{max-width:1400px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--white);margin-bottom:4px}
+.footer-brand .sub{font-size:11px;color:var(--amber);letter-spacing:3px;margin-bottom:16px}
+.footer-brand p{font-size:13px;color:var(--smoke);line-height:1.7;max-width:260px;margin-bottom:20px}
+.footer-socials{display:flex;gap:10px}
+.fsoc{width:36px;height:36px;border:1px solid rgba(200,135,10,.25);display:flex;align-items:center;justify-content:center;color:var(--smoke);text-decoration:none;font-size:13px;transition:all .2s}
+.fsoc:hover{background:var(--amber);color:var(--char);border-color:var(--amber)}
+.footer-col h4{font-size:11px;font-weight:600;color:var(--amber);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.footer-col ul{list-style:none}
+.footer-col li{margin-bottom:10px}
+.footer-col a{color:var(--smoke);text-decoration:none;font-size:13px;transition:color .2s}
+.footer-col a:hover{color:var(--amber-light)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:20px;display:flex;justify-content:space-between;font-size:12px;color:var(--ash)}
+
+@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-left,.nav-right{display:none}
+  .hero h1{font-size:56px}
+  .intro,.experience{grid-template-columns:1fr;padding:60px 24px;gap:48px}
+  .intro-visual{height:320px}
+  .menu-section,.locations,.reservation{padding:72px 24px}
+  .menu-grid{grid-template-columns:1fr}
+  .location-grid{grid-template-columns:1fr}
+  .exp-visual{grid-template-columns:1fr}
+  .res-form{grid-template-columns:1fr}
+  .res-full{grid-column:1}
+  .footer-top{grid-template-columns:1fr 1fr;padding:0 24px}
+  footer{padding:56px 24px 24px}
+  .order-bar{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <ul class="nav-left">
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">Locations</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <div class="nav-logo">
+    <div class="nav-logo-main">Restaurant Name</div>
+    <div class="nav-logo-sub">Grill House · Johannesburg</div>
+  </div>
+  <ul class="nav-right">
+    <li><a href="#">Order Pick-Up</a></li>
+    <li><a href="#">Order Delivery</a></li>
+    <li><a href="#" class="nav-cta">Reserve a Table</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-ember-1"></div>
+  <div class="hero-ember-2"></div>
+  <div class="hero-content">
+    <div class="hero-pre">
+      <div class="hero-line"></div>
+      <div class="hero-pre-text">Johannesburg's Finest Grill House</div>
+      <div class="hero-line"></div>
+    </div>
+    <h1>FIRE.<br><em>Flavour.</em><br>FEAST.</h1>
+    <div class="hero-tagline">Where every cut is a story, and every flame tells the truth.</div>
+    <div class="hero-actions">
+      <a href="#" class="btn-amber">View Our Menu</a>
+      <a href="#" class="btn-outline-amber">Reserve a Table</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
+</div>
+
+<!-- ORDER BAR -->
+<div class="order-bar">
+  <a href="#" class="order-item"><span class="order-icon">🥡</span><div><div class="order-title">Order Pick-Up</div><div class="order-desc">Ready in 20 minutes</div></div></a>
+  <a href="#" class="order-item"><span class="order-icon">🛵</span><div><div class="order-title">Order Delivery</div><div class="order-desc">60–75 min to your door</div></div></a>
+  <a href="#" class="order-item"><span class="order-icon">📍</span><div><div class="order-title">Find a Restaurant</div><div class="order-desc">6 locations across JHB & PTA</div></div></a>
+</div>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-visual">
+    <div class="intro-main-img"><div class="ph"><img src="images.jpg" alt="Steak"></div></div>
+    <div class="intro-accent-img"><div class="ph"><img src="2.jpg" alt="Fires"></div></div>
+    <div class="intro-badge"><div class="intro-badge-num">12</div><div class="intro-badge-label">YEARS OF FIRE</div></div>
+  </div>
+  <div class="intro-text">
+    <div class="section-eyebrow">Our Story</div>
+    <h2>Real Food. Real <em>Flame.</em> No Shortcuts.</h2>
+    <p>At Ember & Bone we've made a simple promise: every burger is hand-pressed, every rack of ribs is slow-cooked over real hardwood, and every plate that leaves our kitchen is something we're genuinely proud of.</p>
+    <p>We've spent twelve years perfecting the art of the grill. Not chasing food trends. Not designing Instagram plates. Just cooking with honesty, heat and a deep respect for quality ingredients sourced from South African farmers we trust.</p>
+    <div class="intro-divider"></div>
+    <div class="intro-features">
+      <div class="intro-feature">Flame-grilled daily</div>
+      <div class="intro-feature">SA sourced beef</div>
+      <div class="intro-feature">Slow-smoked ribs</div>
+      <div class="intro-feature">Made fresh</div>
+    </div>
+  </div>
+</div>
+
+<!-- MENU HIGHLIGHTS -->
+<div class="menu-section">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <div class="section-eyebrow">What We Do Best</div>
+      <h2>The Menu That Built Our Reputation</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-img"><div class="menu-card-tag">SIGNATURE</div><div class="ph"><img src="3.jpg" alt="Classic Burger"></div></div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">The Ember Classic Burger</div>
+          <div class="menu-card-desc">200g flame-grilled SA beef patty, aged cheddar, caramelised onion, house ember sauce on a toasted brioche bun.</div>
+          <div class="menu-card-footer"><div class="menu-price">R185</div><a href="#" class="menu-order">Order Now →</a></div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img"><div class="menu-card-tag">BEST SELLER</div><div class="ph"><img src="4.jpg" alt="Ribs"></div></div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">Full Rack Baby Back Ribs</div>
+          <div class="menu-card-desc">12-hour slow smoked over hardwood, glazed in our signature bone sauce. Served with hand-cut chips & coleslaw.</div>
+          <div class="menu-card-footer"><div class="menu-price">R295</div><a href="#" class="menu-order">Order Now →</a></div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img"><div class="menu-card-tag">NEW</div><div class="ph"><img src="5.jpg" alt="Smash Burger"></div></div>
+        <div class="menu-card-body">
+          <div class="menu-card-name">Wagyu Smash Burger</div>
+          <div class="menu-card-desc">Double smashed Wagyu beef patty, American cheese, pickles, mustard mayo on a potato bun. Simple done perfectly.</div>
+          <div class="menu-card-footer"><div class="menu-price">R245</div><a href="#" class="menu-order">Order Now →</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="menu-cta">
+      <a href="#" class="btn-amber">View Full Menu</a>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="experience">
+  <div class="exp-text">
+    <div class="section-eyebrow">The Experience</div>
+    <h2>More Than a Meal — It's a Ritual</h2>
+    <p>From the moment you walk in to the last bite of dessert, every detail at Ember & Bone is designed to make you feel exactly one thing: taken care of. Our floor team knows the menu. Our kitchen team knows their craft. And together they make sure every visit is one you'll talk about.</p>
+    <div class="exp-stats">
+      <div class="exp-stat"><div class="exp-stat-num">12</div><div class="exp-stat-label">Years in Business</div></div>
+      <div class="exp-stat"><div class="exp-stat-num">6</div><div class="exp-stat-label">Restaurants in SA</div></div>
+      <div class="exp-stat"><div class="exp-stat-num">50K+</div><div class="exp-stat-label">Guests Served</div></div>
+      <div class="exp-stat"><div class="exp-stat-num">4.8★</div><div class="exp-stat-label">Google Rating</div></div>
+    </div>
+  </div>
+  <div class="exp-visual">
+    <div class="exp-card"><span class="exp-card-icon">🔥</span><div class="exp-card-title">Flame Grilled</div><p>Every patty and cut cooked over real hardwood flame — never a flat-top.</p></div>
+    <div class="exp-card"><span class="exp-card-icon">🐄</span><div class="exp-card-title">SA Sourced</div><p>Beef sourced exclusively from South African free-range farms we visit personally.</p></div>
+    <div class="exp-card"><span class="exp-card-icon">🕐</span><div class="exp-card-title">Slow Smoked</div><p>Our ribs spend 12 hours in the smoker before they ever see your plate.</p></div>
+    <div class="exp-card"><span class="exp-card-icon">🤝</span><div class="exp-card-title">Family Welcome</div><p>Kids menu, high chairs and a team that genuinely loves having families in.</p></div>
+  </div>
+</div>
+
+<!-- LOCATIONS -->
+<div class="locations">
+  <div class="locations-inner">
+    <div class="section-eyebrow">Find Us</div>
+    <h2>Six Fires Burning Across Johannesburg & Pretoria</h2>
+    <div class="location-grid">
+      <a href="#" class="location-card"><div class="loc-city">Sandton</div><div class="loc-name">The Marc, Sandton</div><div class="loc-hours">Mon–Sun: 11:00–22:00</div></a>
+      <a href="#" class="location-card"><div class="loc-city">Johannesburg</div><div class="loc-name">Nicolway, Bryanston</div><div class="loc-hours">Mon–Sun: 11:00–22:00</div></a>
+      <a href="#" class="location-card"><div class="loc-city">Johannesburg</div><div class="loc-name">Harvest Place, Fourways</div><div class="loc-hours">Mon–Sun: 11:00–22:00</div></a>
+      <a href="#" class="location-card"><div class="loc-city">Johannesburg</div><div class="loc-name">Neighbourhood Square</div><div class="loc-hours">Mon–Sun: 11:00–22:00</div></a>
+      <a href="#" class="location-card"><div class="loc-city">Pretoria</div><div class="loc-name">Menlyn Maine</div><div class="loc-hours">Mon–Sun: 11:00–22:00</div></a>
+      <a href="#" class="location-card"><div class="loc-city">Pretoria</div><div class="loc-name">Linton's Corner</div><div class="loc-hours">Mon–Sun: 11:00–22:00</div></a>
+    </div>
+    <a href="#" class="btn-outline-amber">Get Directions</a>
+  </div>
+</div>
+
+<!-- RESERVATION -->
+<div class="reservation">
+  <div class="reservation-inner">
+    <div class="section-eyebrow">Book a Table</div>
+    <h2>Reserve Your <em>Seat</em> at the Fire</h2>
+    <p>Join us for lunch, dinner or a private event. Tables fill fast on weekends — book ahead to avoid disappointment.</p>
+    <form class="res-form" onsubmit="return false;">
+      <input type="text" placeholder="First Name">
+      <input type="text" placeholder="Last Name">
+      <input type="email" placeholder="Email Address">
+      <input type="tel" placeholder="Phone Number">
+      <input type="date" class="res-full">
+      <select><option>Select a Restaurant</option><option>The Marc, Sandton</option><option>Nicolway, Bryanston</option><option>Harvest Place, Fourways</option><option>Menlyn Maine, Pretoria</option></select>
+      <select><option>Number of Guests</option><option>1–2 guests</option><option>3–4 guests</option><option>5–6 guests</option><option>7+ guests</option></select>
+      <button type="submit" class="btn-amber res-full" style="border:none;cursor:pointer;font-size:13px;letter-spacing:2px;">Confirm Reservation</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Ember & Bone</h3>
+        <div class="sub">GRILL HOUSE</div>
+        <p>Johannesburg's home of flame-grilled burgers and slow-smoked ribs. Real food, real fire — since 2014.</p>
+        <div class="footer-socials">
+          <a href="#" class="fsoc">f</a>
+          <a href="#" class="fsoc">📷</a>
+          <a href="#" class="fsoc">in</a>
+          <a href="#" class="fsoc">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Eat</h4>
+        <ul>
+          <li><a href="#">Our Menu</a></li>
+          <li><a href="#">Order Pick-Up</a></li>
+          <li><a href="#">Order Delivery</a></li>
+          <li><a href="#">Book a Table</a></li>
+          <li><a href="#">Private Events</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="#">Sandton</a></li>
+          <li><a href="#">Bryanston</a></li>
+          <li><a href="#">Fourways</a></li>
+          <li><a href="#">Menlyn Maine</a></li>
+          <li><a href="#">All Locations</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Work With Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ember & Bone Grill House. All rights reserved.</span>
+      <span>📞 011 000 5678 &nbsp;|&nbsp; hello@emberandbone.co.za</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+</script>
+</body>
+</html>
